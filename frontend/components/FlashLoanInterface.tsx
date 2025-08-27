@@ -33,11 +33,11 @@ export default function FlashLoanInterface() {
     args: address ? [address] : undefined,
   });
 
-  // Read flash loan fee
-  const { data: flashLoanFee } = useReadContract({
+  // Read flash loan fee basis points
+  const { data: feeBasisPoints } = useReadContract({
     address: CONTRACTS.flashLoanProvider as `0x${string}`,
     abi: FLASH_LOAN_PROVIDER_ABI,
-    functionName: 'flashLoanFee',
+    functionName: 'feeBasisPoints',
   });
 
   const handleFlashLoan = async () => {
@@ -129,7 +129,7 @@ export default function FlashLoanInterface() {
             <div className="bg-gray-50 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Execute Flash Loan</h2>
               <p className="text-gray-600 mb-6">
-                Current Flash Loan Fee: {flashLoanFee ? `${flashLoanFee}%` : 'Loading...'}
+                Current Flash Loan Fee: {feeBasisPoints ? `${Number(feeBasisPoints) / 100}%` : 'Loading...'}
               </p>
               
               <div className="space-y-4">
