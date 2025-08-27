@@ -1,94 +1,36 @@
-# Flash Loan Playground Frontend
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This directory will contain the Next.js frontend for the Flash Loan Playground.
+## Getting Started
 
-## Planned Features
-
-- **🔗 Wallet Connection**: RainbowKit integration
-- **💱 Token Selection**: Dropdown for TEST/USDC tokens  
-- **💰 Amount Input**: Flash loan amount with balance validation
-- **⚡ Execute Button**: One-click flash loan execution
-- **📊 Results Display**: Transaction status, fees, profits
-- **🏆 Badge Display**: NFT badge showcase
-- **📈 Stats Dashboard**: Total volume, successful loans, leaderboard
-
-## Tech Stack
-
-- **Framework**: Next.js 14 + TypeScript
-- **Styling**: Tailwind CSS + Tailwind Forms
-- **Web3**: Wagmi + Viem + RainbowKit
-- **State**: TanStack Query for server state
-- **Icons**: Heroicons
-- **Fonts**: Inter
-
-## Quick Start
+First, run the development server:
 
 ```bash
-cd frontend
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Components Structure
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-components/
-├── layout/
-│   ├── Header.tsx           # Navigation + wallet connect
-│   └── Footer.tsx           # Links and info
-├── flash-loan/
-│   ├── TokenSelector.tsx    # TEST/USDC dropdown
-│   ├── AmountInput.tsx      # Amount + max button
-│   ├── ExecuteButton.tsx    # Main CTA
-│   └── ResultCard.tsx       # Transaction results
-├── badge/
-│   ├── BadgeCard.tsx        # NFT badge display
-│   └── BadgeModal.tsx       # Badge details modal
-└── dashboard/
-    ├── StatsCard.tsx        # Metrics display
-    └── LeaderboardTable.tsx # Top users
-```
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## State Management
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```typescript
-// hooks/useFlashLoan.ts
-export function useFlashLoan() {
-  const { data: contracts } = useContracts()
-  const { writeContract } = useWriteContract()
-  
-  const executeFlashLoan = useMutation({
-    mutationFn: async ({ token, amount }: FlashLoanParams) => {
-      return writeContract({
-        address: contracts.borrower,
-        abi: borrowerAbi,
-        functionName: 'executeFlashLoan',
-        args: [contracts.provider, token, amount, '0x']
-      })
-    }
-  })
-  
-  return { executeFlashLoan }
-}
-```
+## Learn More
 
-## Environment Variables
+To learn more about Next.js, take a look at the following resources:
 
-```bash
-# .env.local
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
-NEXT_PUBLIC_CHAIN_ID=41998  # Monad testnet
-NEXT_PUBLIC_RPC_URL=https://testnet-rpc.monad.xyz
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-**To implement the frontend:**
+## Deploy on Vercel
 
-1. Run `npm install` in this directory
-2. Copy contract addresses from `../addresses.json`
-3. Add contract ABIs to `lib/abis/`
-4. Implement components step by step
-5. Test with deployed contracts
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-**The frontend is designed to be a simple, clean interface that showcases the flash loan functionality without overwhelming complexity.**
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
